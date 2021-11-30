@@ -2,9 +2,7 @@
 
 #include "features/caps_word.h"
 
-enum custom_keys {
-    MY_LOCK = SAFE_RANGE,
-};
+#define MY_LOCK LCTL(LGUI(KC_Q))
 
 /****************************************************************************************************
 *
@@ -107,18 +105,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return false;
   }
 
-  if (keycode == MY_LOCK) {
-      if (record->event.pressed) {
-          register_code(KC_LCTL);
-          register_code(KC_LGUI);
-          register_code(KC_Q);
-      } else {
-          unregister_code(KC_Q);
-          unregister_code(KC_LGUI);
-          unregister_code(KC_LCTL);
-      }
-      return false;
-  }
+  // Macros go here.
 
   return true;
 }
