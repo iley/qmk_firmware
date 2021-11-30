@@ -2,12 +2,16 @@
 
 #include "features/caps_word.h"
 
+enum custom_keys {
+    MY_LOCK = SAFE_RANGE,
+};
+
 /****************************************************************************************************
 *
 * Default layer
 *
 * ,--------------------------------------------------------------------------------------------------------------------------.
-* | Esc    |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F8  |  F9  |  F10 |  F11 |  F12 | PSCR | SLCK | PAUS |      |        |
+* | Esc    |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F8  |  F9  |  F10 |  F11 |  F12 | PSCR | SLCK | PAUS |      |  LOCK  |
 * |--------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+--------|
 * | =+     |  1!  |  2@  |  3#  |  4$  |  5%  |                                  |  6^  |  7&  |  8*  |  9(  |  0)  | -_     |
 * |--------+------+------+------+------+------|                                  +------+------+------+------+------+--------|
@@ -63,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                            KC_LALT,
                                            KC_BSPC,KC_DEL ,MO(1)  ,
 
-           KC_F9  ,KC_F10 ,KC_F11 ,KC_F12 ,KC_PSCR,KC_SLCK,KC_PAUS,KC_NO  ,KC_NO  ,
+           KC_F9  ,KC_F10 ,KC_F11 ,KC_F12 ,KC_PSCR,KC_SLCK,KC_PAUS,KC_NO  ,MY_LOCK,
                                    KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_MINS,
                                    KC_Y   ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,KC_BSLS,
                                    KC_H   ,KC_J   ,KC_K   ,KC_L   ,KC_SCLN,KC_QUOT,
@@ -99,7 +103,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-  if (!process_caps_word(keycode, record)) { return false; }
-  // macros go here
+  if (!process_caps_word(keycode, record)) {
+      return false;
+  }
+
+  if (keycode == MY_LOCK) {
+      if (record->event.pressed) {
+          register_code(KC_LCTL);
+          register_code(KC_LGUI);
+          register_code(KC_Q);
+      } else {
+          unregister_code(KC_Q);
+          unregister_code(KC_LGUI);
+          unregister_code(KC_LCTL);
+      }
+      return false;
+  }
+
   return true;
 }
