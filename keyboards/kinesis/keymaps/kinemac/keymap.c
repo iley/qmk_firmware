@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 
+
 #include "features/caps_word.h"
 
 #define MY_LOCK LCTL(LGUI(KC_Q))
@@ -12,6 +13,19 @@ enum custom_keycodes {
 };
 
 /****************************************************************************************************
+*
+* Ilya Strukov's keyboard layout optimized for a software engineer who's using MacOS and Vim.
+* 
+* Differences from vanilla Kinesis layout:
+*   - Up & Down arrows swapped to match Vim's J/K
+*   - Fn, Ctrl, Alt & Command in both thumb clusters
+*   - Esc swapped with Caps Lock for better Vim experience. Caps Lock is also accessible with Fn
+*   - PageUp, PageDown, Home, and End are shifted into the FN layer like on Mac keyboards
+*   - Fn+1 = F1, Fn+2 = F2 etc. This makes function keys easier to reach
+*   - Media keys with Fn like on Mac keyboards
+*   - Program = Lock Screen (Ctrl+Command+Q)
+*   - Fn+Program = reset for firmware programming
+*   - Auto-closing curly braces with Fn
 *
 * Default layer
 *
@@ -39,7 +53,7 @@ enum custom_keycodes {
 * FN layer
 *
 * ,--------------------------------------------------------------------------------------------------------------------------.
-* |        |      |      |      |      |      |PrevTr| Play |NextTr| Mute | VolDn| VolUp|      |      |      |      |        |
+* |        |      |      |      |      |      |PrevTr| Play |NextTr| Mute | VolDn| VolUp|      |      |      |      |  RESET |
 * |--------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+--------|
 * |        |  F1  |  F2  |  F3  |  F4  |  F5  |                                  |  F6  |  F7  |  F8  |  F9  |  F10 |        |
 * |--------+------+------+------+------+------|                                  +------+------+------+------+------+--------|
@@ -49,7 +63,7 @@ enum custom_keycodes {
 * |--------+------+------+------+------+------|                                  |------+------+------+------+------+--------|
 * |        |      |      |      |      |      |                                  |      |      |      |      |      |        |
 * `--------+------+------+------+------+-------                                  `------+------+------+------+------+--------'
-*          |      | Ins  | Home | End  |                                                | PgDn | PgUp |      |      |
+*          |      | Ins  | Home | End  |                                                | PgDn | PgUp |  {}  |  {}* |
 *          `---------------------------'                                                `---------------------------'
 *                                        ,-------------.                ,-------------.
 *                                        |      |      |                |      |      |
