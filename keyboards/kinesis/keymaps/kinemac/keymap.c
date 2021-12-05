@@ -4,6 +4,13 @@
 
 #define MY_LOCK LCTL(LGUI(KC_Q))
 
+enum custom_keycodes {
+    // Auto-closed opening curly brace with newlines.
+    MY_LBRC = SAFE_RANGE,
+    // Closing curly brace with newlines.
+    MY_RBRC,
+};
+
 /****************************************************************************************************
 *
 * Default layer
@@ -87,12 +94,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                            _______,
                                            _______,_______,_______,
 
-           KC_MNXT,KC_MUTE,KC_VOLD,KC_VOLU,_______,_______,_______,_______,_______,
+           KC_MNXT,KC_MUTE,KC_VOLD,KC_VOLU,_______,_______,_______,_______,RESET  ,
                                    KC_F6  ,KC_F7  ,KC_F8  ,KC_F9  ,KC_F10 ,_______,
                                    _______,_______,_______,_______,_______,_______,
                                    KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,_______,_______,
                                    _______,_______,_______,_______,_______,_______,
-                                           KC_PGDN,KC_PGUP,_______,_______,
+                                           KC_PGDN,KC_PGUP,MY_LBRC,MY_RBRC,
                   _______,_______,
                   _______,
                   _______,_______,_______
@@ -101,11 +108,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-  if (!process_caps_word(keycode, record)) {
-      return false;
-  }
+    if (!process_caps_word(keycode, record)) {
+        return false;
+    }
 
-  // Macros go here.
+    if (keycode == MY_LBRC && record->event.pressed) {
+        SEND_STRING("{\n}"SS_TAP(X_UP)SS_TAP(X_END)"\n");
+    } else if (keycode == MY_RBRC && record->event.pressed) {
+        SEND_STRING("\n}"SS_TAP(X_UP)SS_TAP(X_END)"\n");
+    }
 
-  return true;
+    return true;
 }
