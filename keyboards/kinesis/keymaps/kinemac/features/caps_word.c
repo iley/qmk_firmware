@@ -59,6 +59,8 @@ bool process_caps_word(uint16_t keycode, keyrecord_t* record) {
       case KC_BSPC:
       case KC_MINS:
       case KC_UNDS:
+      case KC_LSFT:
+      case KC_RSFT:
         if (shifted) { unregister_code(KC_LSFT); }
         shifted = false;
         return true;
