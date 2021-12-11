@@ -6,9 +6,9 @@
 #define MY_LOCK LCTL(LGUI(KC_Q))
 
 enum custom_keycodes {
-    // Auto-closed opening curly brace with newlines.
+    // Auto-closed opening curly brace with move back.
     MY_LBRC = SAFE_RANGE,
-    // Closing curly brace with newlines.
+    // Closing curly brace with move back.
     MY_RBRC,
 };
 
@@ -127,9 +127,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     }
 
     if (keycode == MY_LBRC && record->event.pressed) {
-        SEND_STRING("{\n}"SS_TAP(X_UP)SS_TAP(X_END)"\n");
+        SEND_STRING("{}"SS_TAP(X_LEFT));
     } else if (keycode == MY_RBRC && record->event.pressed) {
-        SEND_STRING("\n}"SS_TAP(X_UP)SS_TAP(X_END)"\n");
+        SEND_STRING("}"SS_TAP(X_LEFT));
     }
 
     return true;
