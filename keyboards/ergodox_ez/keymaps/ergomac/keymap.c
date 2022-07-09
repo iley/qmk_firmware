@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |  Ins | Home | End  |                                       | PgDn | PgUp |  {}  |  {}* |      |
+ *   | Boot |      |  Ins | Home | End  |                                       | PgDn | PgUp |  {}  |  {}* |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______,_______,_______,_______,_______,_______,_______,
        _______,_______,_______,_______,_______,_______,
        KC_CAPS,_______,_______,_______,_______,_______,_______,
-       _______,_______,KC_INS ,KC_HOME,KC_END ,
+       QK_BOOT,_______,KC_INS ,KC_HOME,KC_END ,
                                        _______,_______,
                                                _______,
                                _______,_______,_______,
@@ -97,3 +97,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______, _______, _______
 ),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (keycode == MY_LBRC && record->event.pressed) {
+        SEND_STRING("{}"SS_TAP(X_LEFT));
+    } else if (keycode == MY_RBRC && record->event.pressed) {
+        SEND_STRING("}"SS_TAP(X_LEFT));
+    }
+
+    return true;
+}
