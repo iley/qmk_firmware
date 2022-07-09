@@ -1,7 +1,5 @@
 #include QMK_KEYBOARD_H
 
-#include "features/caps_word.h"
-
 #define MY_LOCK LCTL(LGUI(KC_Q))
 
 enum custom_keycodes {
@@ -99,17 +97,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______, _______, _______
 ),
 };
-
-bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!process_caps_word(keycode, record)) {
-        return false;
-    }
-
-    if (keycode == MY_LBRC && record->event.pressed) {
-        SEND_STRING("{}"SS_TAP(X_LEFT));
-    } else if (keycode == MY_RBRC && record->event.pressed) {
-        SEND_STRING("}"SS_TAP(X_LEFT));
-    }
-
-    return true;
-}
