@@ -117,3 +117,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (keycode == MY_LBRC && record->event.pressed) {
+        SEND_STRING("{}"SS_TAP(X_LEFT));
+    } else if (keycode == MY_RBRC && record->event.pressed) {
+        SEND_STRING("}"SS_TAP(X_LEFT));
+    }
+
+    return true;
+}
