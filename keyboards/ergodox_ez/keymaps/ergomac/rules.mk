@@ -12,5 +12,6 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 AUDIO_ENABLE = no           # Audio output
 RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight. 
 SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
+DYNAMIC_MACRO_ENABLE = yes  # Dynamic macros
 
 SRC += features/caps_word.c
