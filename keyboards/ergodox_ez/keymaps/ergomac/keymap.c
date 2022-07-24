@@ -116,7 +116,6 @@ bool caps_word_press_user(uint16_t keycode) {
             return true;
 
         // Keycodes that continue Caps Word, without shifting.
-        case KC_1 ... KC_0:
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
@@ -124,6 +123,15 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_LSFT:
         case KC_RSFT:
             return true;
+
+        // Digits continue Caps Word unless shifted.
+        case KC_1 ... KC_0: {
+            const uint8_t mods = get_mods();
+            if (mods & MOD_MASK_SHIFT) {
+                return false;
+            }
+            return true;
+        }
 
         default:
             return false;  // Deactivate Caps Word.
