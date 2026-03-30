@@ -12,7 +12,7 @@ enum custom_keycodes {
 /****************************************************************************************************
 *
 * Ilya Strukov's keyboard layout optimized for a software engineer who's using MacOS and Vim.
-* 
+*
 * Differences from vanilla Kinesis layout:
 *   - Up & Down arrows swapped to match Vim's J/K
 *   - Fn, Ctrl, Alt & Command in both thumb clusters
@@ -56,7 +56,7 @@ enum custom_keycodes {
 * |--------+------+------+------+------+------|                                  +------+------+------+------+------+--------|
 * |        |      |      |      |      |      |                                  |      |      |      |      |      |        |
 * |--------+------+------+------+------+------|                                  |------+------+------+------+------+--------|
-* | Caps   |      |      |      |      |      |                                  | Left | Down |  Up  | Right|      |        |
+* | Caps   |      |      |      |      |      |                                  |      |      |      | LOCK |      |        |
 * |--------+------+------+------+------+------|                                  |------+------+------+------+------+--------|
 * |        |      |      |      |      |      |                                  |      |      |      |      |      |        |
 * `--------+------+------+------+------+-------                                  `------+------+------+------+------+--------'
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_MNXT,KC_MUTE,KC_VOLD,KC_VOLU,_______,_______,_______,_______,QK_RBT ,
                                    KC_F6  ,KC_F7  ,KC_F8  ,KC_F9  ,KC_F10 ,_______,
                                    _______,_______,_______,_______,_______,_______,
-                                   KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,_______,_______,
+                                   _______,_______,_______,MY_LOCK,_______,_______,
                                    _______,_______,_______,_______,_______,_______,
                                            KC_PGDN,KC_PGUP,MY_LBRC,MY_RBRC,
                   _______,_______,
